@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    #div1 {
+        width: 680px;
+        height: 170px;
+        position: relative;
+        background: red;
+        margin: 100px auto;
+        border: 2px solid #000;
+        overflow: hidden;
+    }
+
+    #div1 ul {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0;
+    }
+
+    #div1 ul li {
+        float: left;
+        list-style: none;
+        width: 170px;
+        height: 170px;
+        border: 1px solid blue;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+        var odiv1 = document.getElementById('div1');
+        var oul = odiv1.getElementsByTagName('ul')[0];
+        var oli = odiv1.getElementsByTagName('li');
+        var btn1 = document.getElementsByTagName('input')[0];
+        var btn2 = document.getElementsByTagName('input')[1];
+
+        var speed = -2;
+
+        oul.innerHTML = oul.innerHTML + oul.innerHTML;
+        oul.style.width = oli[0].offsetWidth * oli.length + 'px';
+
+        time = function() {
+            oul.style.left = oul.offsetLeft + speed + 'px';
+            if (oul.offsetLeft < -oul.offsetWidth / 2) {
+                oul.style.left = 0;
+            } else if (oul.offsetLeft > 0) {
+                oul.style.left = -oul.offsetWidth / 2 + 'px';
+            }
+        }
+
+        none = setInterval(time, 30);
+
+        odiv1.onmouseover = function() {
+            clearInterval(none);
+        };
+        odiv1.onmouseout = function() {
+            none = setInterval(time, 30);
+        };
+
+        btn1.onclick = function() {
+            speed = -2;
+        };
+        btn2.onclick = function() {
+            speed = 2;
+        };
+    };
+    </script>
+</head>
+
+<body>
+    <input type="button" value="向左" />
+    <input type="button" value="向右" />
+    <div id="div1">
+        <ul>
+            <li><img src="images/1.jpg" /></li>
+            <li><img src="images/2.jpg" /></li>
+            <li><img src="images/3.jpg" /></li>
+            <li><img src="images/4.jpg" /></li>
+        </ul>
+    </div>
+</body>
+
+</html>

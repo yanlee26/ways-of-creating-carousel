@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>无缝轮播图(左右轮播)</title>
+    <style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #div {
+        width: 400px;
+        height: 200px;
+        margin: 10px auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #list {
+        list-style-type: none;
+        width: 100000px;
+        overflow: hidden;
+        position: absolute;
+        left: -400px;
+    }
+
+    li {
+        float: left;
+    }
+
+    li,
+    img {
+        width: 400px;
+        height: 200px;
+    }
+    </style>
+    
+</head>
+
+<body onload="myload()">
+    <div id="div">
+        <ul id="list">
+            <li>
+                <img src="http://7xj89g.com1.z0.glb.clouddn.com/demo3.jpg?imageView2/2/w/400/q/50" />
+            </li>
+            <!--第3张图片-->
+            <li>
+                <img src="http://7xj89g.com1.z0.glb.clouddn.com/demo1.jpg?imageView2/2/w/400/q/50" />
+            </li>
+            <!--第1张图片-->
+            <li>
+                <img src="http://7xj89g.com1.z0.glb.clouddn.com/demo2.jpg?imageView2/2/w/400/q/50" />
+            </li>
+            
+            <!--第3张图片-->
+            <li>
+                <img src="http://7xj89g.com1.z0.glb.clouddn.com/demo1.jpg?imageView2/2/w/400/q/50" />
+            </li>
+        </ul>
+    </div>
+    <button id="btn1">左</button>
+    <button id="btn2">右</button>
+    <button id="btn3">暂停</button>
+    <button id="btn4">开始</button>
+</body>
+<script>
+    function myload() {
+        var ulID = document.getElementById("list");
+        var liList = document.getElementsByTagName("li"); //li的集合
+        var len = liList.length; //图片的个数
+        var liwidth = liList[0].clientWidth; //li宽度
+        var totalWidth = (len - 1) * liwidth * (-1); //图片总宽度
+        var varyLeft = ulID.offsetLeft; //ul初始left值
+        var speed = 4; //每次移动距离
+        var btnOne = document.getElementById("btn1");
+        var btnTwo = document.getElementById("btn2");
+        var btnThree = document.getElementById("btn3");
+        var btnFour = document.getElementById("btn4");
+
+        btnOne.onclick = function() {
+            speed = 4;
+        };
+        btnTwo.onclick = function() {
+            speed = -4;
+        }
+
+        function move() {
+            if (varyLeft < totalWidth) { //左移完最后一张后，瞬间切换到第二张a，第二张a和最后一张a'相同
+                ulID.style.left = "-400px";
+                varyLeft = -400;
+            }
+            //右移完第二张a后，瞬间切换到倒数第二张c，第一张c'和c是同一张
+            if (varyLeft > -400) //或者右移时varyLeft>0，ulID.style.left = "-1200px";
+            {
+                ulID.style.left = "-1600px";
+                varyLeft = -1600;
+            }
+            varyLeft -= speed; //每次移动后的left的值
+            ulID.style.left = varyLeft + "px";
+        }
+
+        var timer = setInterval(move, 40); //每个40毫秒左移一次
+        btnThree.onclick = function() { //暂停
+            clearInterval(timer);
+        }
+        btnFour.onclick = function() { //开始
+            timer = setInterval(move, 40);
+        }
+    }
+    </script>
+</html>

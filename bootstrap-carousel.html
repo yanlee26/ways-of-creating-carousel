@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .carousel-inner>.item {
+        position: relative;
+        display: none;
+        transition: transform .6s ease-in-out;
+    }
+    .carousel-inner>.active,
+    .carousel-inner>.next,
+    .carousel-inner>.prev {
+        display: block;
+    }
+    .carousel-inner>.item.active,
+    .carousel-inner>.item.next.left,
+    .carousel-inner>.item.prev.right {
+        left: 0;
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-inner>.item.active.left,
+    .carousel-inner>.item.prev {
+        left: 0;
+        transform: translate3d(-100%, 0, 0);
+    }
+    .carousel-inner>.item.active.right,
+    .carousel-inner>.item.next {
+        left: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            1
+        </div>
+        <div class="item">
+            2
+        </div>
+        <div class="item">
+            3
+        </div>
+    </div>
+</body>
+
+</html>

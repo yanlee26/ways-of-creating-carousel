@@ -1,0 +1,82 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+    .stage_area {
+        width: 100%;
+        min-height: 100px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 150%;
+        height: 100px;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        position: absolute;
+    }
+
+    .piece {
+        width: 100%;
+        position: absolute;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="stage" class="stage_area">
+        <div id="container" class="container">
+            <div class="piece">
+                1
+            </div>
+            <div class="piece">
+                2
+            </div>
+            <div class="piece">
+                3
+            </div>
+        </div>
+    </div>
+    <span id='prev'>prev</span>
+    <span id='next'>next</span>
+    <script>
+    (function() {
+        function transform(element, value) {
+            return element.style['transform'] = value;
+        }
+
+        function $(selector) {
+            return document.querySelector(selector);
+        }
+
+        function $$(selector) {
+            return document.querySelectorAll(selector);
+        }
+
+        var eleStage = $("#stage"),
+            eleContainer = $("#container"),
+            elePics = $$(".piece");
+
+        var indexPiece = 0,
+            rotate = 360/$$('#container div').length,
+            transZ = 50/2 / Math.tan((rotate / 2 / 180) * Math.PI);
+
+        $('#prev').onclick = function() {
+            transform(eleContainer, "rotateY(" + (-1 * rotate * ++indexPiece) + "deg)");
+        };
+        $('#next').onclick = function() {
+            transform(eleContainer, "rotateY(" + (-1 * rotate * --indexPiece) + "deg)");
+        };
+
+        [...$$('#container div')].forEach(function(ele, j) {
+            transform(ele, "rotateY(" + j * rotate + "deg) translateZ(" + transZ + "px)");
+        });
+
+    })();
+    </script>
+</body>
+
+</html>
