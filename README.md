@@ -174,12 +174,12 @@ function transform(element, value) {
 
 ```
 
-## 6. css变换：css3（transform)
+## 6. css变换：css3（transform)||css3 transition
 
     思路： 在同一个父容器内，
     1. 活动元素显示，非活动元素过渡切换状态
 
-核心代码：```bootstrap-carsoul.html```
+核心代码：```bootstrap-carsoul.html``` ```css3-transition.html```
 
 ```
 //css
@@ -215,4 +215,20 @@ function transform(element, value) {
     }
 //js
 
+```
+
+```
+//css
+ #slideshow img {
+        width: 800px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s linear;
+    }
+
+    #slideshow img.active {
+        opacity: 1;
+    }
 ```

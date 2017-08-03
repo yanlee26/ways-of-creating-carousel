@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>transition</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #slideshow {
+        width: 800px;
+        height: 350px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #slideshow img {
+        width: 800px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s linear;
+    }
+
+    #slideshow img.active {
+        opacity: 1;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="slideshow">
+        <img class="active" src="img/1.jpg" />
+        <img src="img/2.jpg" />
+        <img src="img/1.jpg" />
+    </div>
+    <script type="text/javascript">
+    window.onload = function slideshow() {
+        var slideshow = document.getElementById("slideshow"),
+            imgs = slideshow.getElementsByTagName("img"), 
+            current = 0; 
+
+        function slideOff() {
+            imgs[current].className = ""; 
+        }
+
+        function slideOn() {
+            imgs[current].className = "active"; 
+        }
+
+        function changeSlide() { 
+            slideOff(); 
+            current++; 
+            if (current >= 3) current = 0;
+            slideOn(); 
+        }
+
+        var slideon = setInterval(changeSlide, 2000);
+        slideshow.onmouseover = function() {
+            clearInterval(slideon); 
+        }
+        slideshow.onmouseout = function() {
+            slideon = setInterval(changeSlide, 2000); 
+        }
+
+    }
+    </script>
+</body>
+
+</html>
