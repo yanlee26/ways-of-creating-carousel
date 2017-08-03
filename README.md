@@ -57,26 +57,35 @@ var go = function() {
 ```
 
 
-## 2. css渐变：css + js滑动动画
+## 2. css渐变：css-transition
 
     思路： 在同一个父容器内，
-    1. 通过改变父容器的`left` 值实现---视图切换，
-    2. 通过补充边界视图的过渡状态，外观上实现---无缝滚动。
+    1. 通过改变各个仕途的过渡渐变，实现
 
-核心代码：
+核心代码：```css3-transition.html```
 
 ```
 //css
 
-//js
+#slideshow img {
+        width: 800px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s linear;
+    }
+
+    #slideshow img.active {
+        opacity: 1;
+    }
 
 ```
 
 ## 3. css动画：css-animate
 
     思路： 在同一个父容器内，
-    1. 通过改变父容器的`left` 值实现---视图切换，
-    2. 通过补充边界视图的过渡状态，外观上实现---无缝滚动。
+    1. 通过各个视图切换动画实现
 
 核心代码：``` css-animate.html```
 
@@ -179,7 +188,7 @@ function transform(element, value) {
     思路： 在同一个父容器内，
     1. 活动元素显示，非活动元素过渡切换状态
 
-核心代码：```bootstrap-carsoul.html``` ```css3-transition.html```
+核心代码：```bootstrap-carsoul.html``` 
 
 ```
 //css
@@ -215,20 +224,4 @@ function transform(element, value) {
     }
 //js
 
-```
-
-```
-//css
- #slideshow img {
-        width: 800px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: opacity 1s linear;
-    }
-
-    #slideshow img.active {
-        opacity: 1;
-    }
 ```
