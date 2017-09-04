@@ -143,7 +143,10 @@ function transform(element, value) {
 ## 5. bootstrap：css3（transform：translate3d） + js
 
     思路： 在同一个父容器内，
-    1. 活动元素显示，非活动元素过渡切换状态
+    1. 重点难点在于css3的过渡与渐变的应用；
+    2. 临界状态过渡处理；
+    3. 活动元素class：active->active left||right->'',下一个活动元素class：next left || prev right->active；
+    4. 同一次状态只改变两个元素的class属性；
 
 核心代码：```bootstrap-carsoul.html```
 
