@@ -46,6 +46,57 @@
             3
         </div>
     </div>
+    <script>
+       window.onload = function() {
+     var items = document.querySelectorAll('.carousel-inner .item');
+     var prev = document.querySelector('#prev');
+     var next = document.querySelector('#next');
+     var animated = false;
+     var cur = 0;
+     var duration = 1000;
+
+     function moveTo(i) {
+       animated = true;
+       if (i > 0) {
+         cur = cur === 2 ? 0 : cur + i;
+         var cLeft = cur - i === -1 ? 2 : cur - i;
+         transition(cur, cLeft)
+       } else {
+         cur = cur === 0 ? 2 : cur + i;
+         var cRight = cur - i === 3 ? 0 : cur - i;
+         transition(cur, cRight)
+       }
+
+       function transition(cur, cx) {
+         console.log(cur, cx)
+         items[cx].classList.add('left');
+         items[cur].classList.add('next', 'left');
+         setTimeout(() => {
+           items[cx].classList.remove('active', 'left');
+           items[cur].classList.remove('next', 'left');
+           items[cur].classList.add('active');
+           animated = false;
+         }, duration);
+       }
+     }
+
+
+     prev.onclick = function() {
+       if (animated) {
+         return
+       }
+       moveTo(-1);
+     }
+     next.onclick = function() {
+       if (animated) {
+         return
+       }
+       moveTo(1);
+     }
+
+
+   }
+    </script>
 </body>
 
 </html>
