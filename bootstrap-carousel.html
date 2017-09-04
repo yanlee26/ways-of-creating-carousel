@@ -295,7 +295,6 @@
        }
 
        function transition(cur, cx, order, direction) {
-         console.log(cur, cx)
          items[cx].classList.add(direction);
          items[cur].classList.add(order, direction);
          setTimeout(() => {
