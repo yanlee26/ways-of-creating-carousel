@@ -182,7 +182,51 @@ function transform(element, value) {
         left: 0;
         transform: translate3d(100%, 0, 0);
     }
-//js
+//js(mocking up)
+    window.onload = function() {
+      var items = document.querySelectorAll('.carousel-inner .item');
+      var prev = document.querySelector('#prev');
+      var next = document.querySelector('#next');
+      var animated = false;
+      var cur = 0;
+      var duration = 600;
+
+      function moveTo(i) {
+        animated = true;
+        if (i > 0) {
+          cur = cur === 2 ? 0 : cur + i;
+          var cLeft = cur - i === -1 ? 2 : cur - i;
+          transition(cur, cLeft, 'next', 'left')
+        } else {
+          cur = cur === 0 ? 2 : cur + i;
+          var cRight = cur - i === 3 ? 0 : cur - i;
+          transition(cur, cRight, 'prev', 'right')
+        }
+
+        function transition(cur, cx, order, direction) {
+          items[cx].classList.add(direction);
+          items[cur].classList.add(order, direction);
+          setTimeout(() => {
+            items[cx].classList.remove('active', direction);
+            items[cur].classList.remove(order, direction);
+            items[cur].classList.add('active');
+            animated = false;
+          }, duration);
+        }
+      }
+      prev.onclick = function() {
+        if (animated) {
+          return
+        }
+        moveTo(-1);
+      }
+      next.onclick = function() {
+        if (animated) {
+          return
+        }
+        moveTo(1);
+      }
+    }
 
 ```
 
